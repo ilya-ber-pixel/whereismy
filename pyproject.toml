@@ -11,22 +11,22 @@ dependencies = [
     "asyncpg>=0.29.0",
     "pgvector==0.4.*",
     "alembic==1.9.*",
-   
     # Конфигурация
-    "pydantic>=2.5.0",
+    "pydantic==2.5.*",
+    "pydantic-settings>=2.0.0",
     "python-dotenv>=1.0.0",
     "pyyaml>=6.0",
-
+    "passlib[bcrypt]>=1.7.0",
+    "python-jose[cryptography]>=3.3.0",
     # Веб-сервер и API
     "fastapi==0.121.*",
     "uvicorn[standard]>=0.38.0",
-
     # Telegram-бот
     "aiogram>=3.22.0",
-
     # Машинное обучение для векторизации
     "sentence-transformers",
     "torch", # Укажем --index-url при установке
+    "jinja2>=3.1.6",
 ]
 
 [tool.uv]
@@ -45,6 +45,8 @@ type = "index"
 dev = [
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
+    "uvicorn[standard]>=0.24.0",
+    "httpx>=0.25.0"
 ]
 [tool.setuptools.packages.find]
 # Указываем, ГДЕ искать пакеты.

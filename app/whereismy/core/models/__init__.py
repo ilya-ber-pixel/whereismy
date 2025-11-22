@@ -1,13 +1,9 @@
-# app/whereismy/core/models/__init__.py
-
 from .base import Base
-from .category import Category
-from .item import ContactMethod, Item, ItemStatus, ItemType
-from .location import Location
 from .user import User
+from .category import Category
+from .location import Location
+from .item import Item, ItemType, ItemStatus, ContactMethod
 
-# __all__ определяет, какие имена будут импортированы,
-# когда используется `from .models import *`
 __all__ = [
     "Base",
     "User",

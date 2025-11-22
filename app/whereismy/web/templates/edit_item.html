@@ -1,0 +1,47 @@
+<!-- app/whereismy/web/templates/edit_item.html -->
+{% extends "base.html" %}
+
+{% block title %}Редактировать объявление {{ item.id }}{% endblock %}
+
+{% block content %}
+<h2>Редактировать объявление {{ item.id }}</h2>
+
+<form method="post"> <!-- Форма отправляется на эндпоинт обновления, например, /api/v1/items/{id} -->
+    <div class="mb-3">
+        <label for="title" class="form-label">Заголовок</label>
+        <input type="text" class="form-control" id="title" name="title" value="{{ item.title }}" required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Описание</label>
+        <textarea class="form-control" id="description" name="description" rows="3" required>{{ item.description }}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="category_id" class="form-label">Категория</label>
+        <select class="form-control" id="category_id" name="category_id" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id == item.category_id %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="location_id" class="form-label">Локация</label>
+        <select class="form-control" id="location_id" name="location_id">
+            <option value="">Не указана</option>
+            {% for location in locations %}
+                <option value="{{ location.id }}" {% if location.id == item.location_id %}selected{% endif %}>{{ location.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="status" class="form-label">Статус</label>
+        <select class="form-control" id="status" name="status" required>
+            <option value="active" {% if item.status == "active" %}selected{% endif %}>Активно</option>
+            <option value="archived" {% if item.status == "archived" %}selected{% endif %}>Архив</option>
+        </select>
+    </div>
+    <!-- Добавьте другие поля по необходимости -->
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="/admin/dashboard" class="btn btn-secondary">Отмена</a>
+</form>
+
+{% endblock %}

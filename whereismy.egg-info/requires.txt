@@ -2,9 +2,12 @@ sqlalchemy[asyncio]>=2.0
 asyncpg>=0.29.0
 pgvector==0.4.*
 alembic==1.9.*
-pydantic>=2.5.0
+pydantic==2.5.*
+pydantic-settings>=2.0.0
 python-dotenv>=1.0.0
 pyyaml>=6.0
+passlib[bcrypt]>=1.7.0
+python-jose[cryptography]>=3.3.0
 fastapi==0.121.*
 uvicorn[standard]>=0.38.0
 aiogram>=3.22.0
@@ -14,3 +17,5 @@ torch
 [dev]
 pytest>=8.0.0
 pytest-asyncio>=0.23.0
+uvicorn[standard]>=0.24.0
+httpx>=0.25.0

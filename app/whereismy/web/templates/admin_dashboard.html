@@ -1,0 +1,57 @@
+<!-- app/whereismy/web/templates/admin_dashboard.html (или item_list.html) -->
+{% extends "base.html" %}
+
+{% block title %}Панель модератора{% endblock %}
+
+{% block content %}
+<h2>Панель модератора</h2>
+<p>Добро пожаловать, {{ current_moderator.username }}!</p>
+
+<div class="row mb-3">
+    <div class="col">
+        <a href="/admin/categories" class="btn btn-secondary">Управление категориями</a>
+        <a href="/admin/locations" class="btn btn-secondary">Управление локациями</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h3>Объявления</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Заголовок</th>
+                    <th>Описание</th>
+                    <th>Категория</th>
+                    <th>Локация</th>
+                    <th>Автор</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.category.name }}</td>
+                    <td>{{ item.location.name if item.location else "Не указана" }}</td>
+                    <td>{{ item.author.username or item.author.telegram_id }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>
+                        <a href="/admin/items/{{ item.id }}/edit" class="btn btn-sm btn-outline-primary">Редактировать</a>
+                        {% if item.status != "archived" %}
+                            <a href="/admin/items/{{ item.id }}/archive" class="btn btn-sm btn-outline-warning">Архивировать</a>
+                        {% endif %}
+                        <a href="/admin/items/{{ item.id }}/delete" class="btn btn-sm btn-outline-danger">Удалить</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

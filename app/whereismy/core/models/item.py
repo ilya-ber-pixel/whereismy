@@ -51,10 +51,10 @@ class Item(Base):
     type: Mapped[ItemType] = mapped_column(nullable=False, native_enum=False)
     status: Mapped[ItemStatus] = mapped_column(
         default=ItemStatus.ACTIVE,
-        server_default=ItemStatus.ACTIVE.value,
-        native_enum=False 
+        server_default=ItemStatus.ACTIVE.name,
+        native_enum=False
     )
-    
+
     # Описательные поля
     description: Mapped[str | None] = mapped_column(nullable=True)
     photo_id: Mapped[str | None] = mapped_column(nullable=True) # file_id из Telegram
@@ -73,7 +73,7 @@ class Item(Base):
         server_default=text("TIMEZONE('utc', now())")
     )
     archived_at: Mapped[datetime.datetime | None] = mapped_column(nullable=True)
-    
+
     # Определяем обратные связи для удобного доступа к связанным объектам из Item
     author: Mapped["User"] = relationship(back_populates="items")
     category: Mapped["Category"] = relationship(back_populates="items")
