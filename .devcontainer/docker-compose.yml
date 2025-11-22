@@ -12,6 +12,7 @@ services:
 
     volumes:
       - ..:/workspace:cached
+      - ~/.ssh:/home/vscode/.ssh:cached
       - ~/.pip:/home/vscode/.pip:cached
       - ~/sandboxes:/sandboxes:cached
 
