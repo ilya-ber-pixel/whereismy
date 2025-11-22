@@ -1,0 +1,43 @@
+{
+    "name": "WhereIsMy",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": ".devcontainer/post-create.sh",
+    // Configure tool-specific properties.
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python"
+            },
+
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python",
+                "sleistner.vscode-fileutils",
+                "mhutchie.git-graph",
+                "GitLab.gitlab-workflow",
+                "redhat.vscode-yaml",
+                "rohinivsenthil.rabbitrace",
+                "xyz.plsql-language",
+                "ckolkman.vscode-postgres",
+                "eamodio.gitlens",
+                "cweijan.vscode-redis-client",
+                "njqdev.vscode-python-typehint",
+                "bierner.markdown-mermaid",
+                "ms-python.vscode-pylance",
+                "ms-python.pylint",
+                "ms-python.autopep8",
+                "charliermarsh.ruff"
+            ]
+        }
+    },
+
+    "remoteUser": "vscode",
+    "features": {
+        "docker-in-docker": "latest",
+        "docker-from-docker": "latest"
+    }
+}

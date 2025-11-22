@@ -1,0 +1,56 @@
+# pyproject.toml
+
+[project]
+name = "whereismy"
+version = "0.1.0"
+description = "Lost and found service for a university campus."
+requires-python = ">=3.11"
+dependencies = [
+    # Ядро и работа с БД
+    "sqlalchemy[asyncio]>=2.0",
+    "asyncpg>=0.29.0",
+    "pgvector==0.4.*",
+    "alembic==1.9.*",
+   
+    # Конфигурация
+    "pydantic>=2.5.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0",
+
+    # Веб-сервер и API
+    "fastapi==0.121.*",
+    "uvicorn[standard]>=0.38.0",
+
+    # Telegram-бот
+    "aiogram>=3.22.0",
+
+    # Машинное обучение для векторизации
+    "sentence-transformers",
+    "torch", # Укажем --index-url при установке
+]
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cpu"
+type = "index"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+[tool.setuptools.packages.find]
+# Указываем, ГДЕ искать пакеты.
+# Для dev-сборки он найдет 'app'.
+# Для prod-сборки он найдет '.', так как мы копируем содержимое 'app' в корень.
+where = ["app", "."]
+# Указываем, ЧТО именно искать.
+# Это предотвратит случайное включение других пакетов (например, alembic).
+include = ["whereismy*"]
